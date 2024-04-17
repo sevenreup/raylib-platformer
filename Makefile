@@ -1,5 +1,9 @@
 prepare: 
 	cmake --preset=default
 
-run: main.cpp
+@build: src/main.cpp
 	cmake --build build
+
+run: src/main.cpp
+	cmake --build build
+	./build/Platformer.exe

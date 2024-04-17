@@ -1,16 +1,29 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(RaylibIntro)
+set(NAME "Platformer")
 
-# set(CMAKE_TOOLCHAIN_FILE C:/bin/vcpkg/scripts/buildsystems/vcpkg.cmake)
+project(${NAME})
 
 find_package(raylib CONFIG REQUIRED)
 find_package(fmt CONFIG REQUIRED)
 
-add_executable(RaylibIntro main.cpp)
+include(cmake/sourcelist.cmake)
 
-# target_include_directories(RaylibIntro PUBLIC raylib "include" )
+source_group(
+    ${sources}
+)
 
-target_link_libraries(RaylibIntro PRIVATE raylib)
-# target_link_libraries(RaylibIntro PRIVATE raylib_static)
-target_link_libraries(RaylibIntro PRIVATE fmt::fmt-header-only)
+file (GLOB SRC_FILES  src/*.cpp)
+file (GLOB SRC_FILES  src/*.h)
+
+add_executable(${NAME} src/main.cpp ${sources})
+
+target_include_directories(
+    ${PROJECT_NAME}
+    PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/src
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/game
+)
+
+target_link_libraries(${NAME} PRIVATE raylib)
+target_link_libraries(${NAME} PRIVATE fmt::fmt-header-only)
