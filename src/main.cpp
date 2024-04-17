@@ -4,21 +4,9 @@
 
 int main()
 {
-    Game game = Game();
-    const int screenWidth = 800;
-    const int screenHeight = 450;
-
-    InitWindow(screenWidth, screenHeight, "raylib [core] example - basic screen manager");
-
-    fmt::print("Hello World!\n");
-
-    while (!WindowShouldClose())
-    {
-        BeginDrawing();
-        ClearBackground(RAYWHITE);
-        EndDrawing();
-    }
-
-    CloseWindow();
+    const float screenWidth = 800;
+    const float screenHeight = 450;
+    Game game = Game(screenWidth, screenHeight);
+    game.Run();
     return 0;
 }
