@@ -22,13 +22,12 @@ void Game::_gameLoop()
 {
     InitWindow(mDimension.x, mDimension.y, "raylib [core] example - basic screen manager");
 
-    fmt::print("Hello World!\n");
+    SetTargetFPS(60);
 
     while (!WindowShouldClose())
     {
         mMainScreen->Update();
         BeginDrawing();
-        ClearBackground(LIME);
         mMainScreen->Draw();
         EndDrawing();
     }
