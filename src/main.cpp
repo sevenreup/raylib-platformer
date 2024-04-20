@@ -1,5 +1,3 @@
-#include <fmt/core.h>
-#include "raylib.h"
 #include "game/game.h"
 
 int main()

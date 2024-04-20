@@ -1,9 +1,8 @@
 #pragma once
 
 #include "raylib.h"
-#include "core/entity.h"
 
-class Player : public Entity
+class Player
 {
 private:
     float mSpeed;
