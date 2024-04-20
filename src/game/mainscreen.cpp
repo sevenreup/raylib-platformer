@@ -2,11 +2,11 @@
 
 Mainscreen::Mainscreen(Vector2 dimension)
 {
-    player = {400, 280, 40, 40};
+    player = {};
 
     mDimension = dimension;
     mCamera = {0};
-    mCamera.target = (Vector2){player.x + 20.0f, player.y + 20.0f};
+    mCamera.target = player.position;
     mCamera.offset = (Vector2){dimension.x / 2.0f, dimension.y / 2.0f};
     mCamera.rotation = 0.0f;
     mCamera.zoom = 1.0f;
@@ -25,7 +25,7 @@ Mainscreen::Mainscreen(Vector2 dimension)
         buildColors[i] = (Color){GetRandomValue(200, 240), GetRandomValue(200, 240), GetRandomValue(200, 250), 255};
     }
     // print the number of buildings
-    fmt::print("Number of buildings: {}\n", MAX_BUILDINGS);
+    fmt::print("Number of buildings: {}\n", buildColors[0].a);
 }
 
 Mainscreen::~Mainscreen()
@@ -34,13 +34,11 @@ Mainscreen::~Mainscreen()
 
 void Mainscreen::Update()
 {
-    if (IsKeyDown(KEY_RIGHT))
-        player.x += 2;
-    else if (IsKeyDown(KEY_LEFT))
-        player.x -= 2;
+    float deltaTime = GetFrameTime();
+    player.Update(deltaTime);
 
     // Camera target follows player
-    mCamera.target = (Vector2){player.x + 20, player.y + 20};
+    mCamera.target = (Vector2){player.position.x + 20, player.position.y + 20};
 
     // Camera rotation controls
     if (IsKeyDown(KEY_A))
@@ -77,9 +75,11 @@ void Mainscreen::Draw()
     DrawRectangle(-6000, 320, 13000, 8000, DARKGRAY);
 
     for (int i = 0; i < MAX_BUILDINGS; i++)
+    {
         DrawRectangleRec(buildings[i], buildColors[i]);
+    }
 
-    DrawRectangleRec(player, RED);
+    player.Draw();
 
     DrawLine((int)mCamera.target.x, -mDimension.y * 10, (int)mCamera.target.x, mDimension.y * 10, GREEN);
     DrawLine(-mDimension.x * 10, (int)mCamera.target.y, mDimension.x * 10, (int)mCamera.target.y, GREEN);
