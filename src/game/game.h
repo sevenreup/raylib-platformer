@@ -5,9 +5,13 @@
 #include "mainscreen.h"
 #include <fmt/core.h>
 #include "core/coordinator.h"
-#include "core/components.h"
 #include <random>
 #include <chrono>
+
+#include "core/systems/physics_system.h"
+#include "core/systems/render_system.h"
+
+#include "core/components/camera.h"
 
 class Game
 {

@@ -2,26 +2,12 @@
 
 #include "raylib.h"
 #include "raymath.h"
-#include "coordinator.h"
-#include "models.h"
+#include "core/coordinator.h"
+#include "core/models.h"
 
-struct Gravity
-{
-    Vector3 force;
-};
-
-struct RigidBody
-{
-    Vector3 velocity;
-    Vector3 acceleration;
-};
-
-struct TransformComp
-{
-    Vector3 position;
-    Vector3 rotation;
-    Vector3 scale;
-};
+#include "core/components/rigid_body.h"
+#include "core/components/transform.h"
+#include "core/components/gravity.h"
 
 extern Coordinator gCoordinator;
 

@@ -20,14 +20,25 @@ void Game::Run()
     gCoordinator.RegisterComponent<Gravity>();
     gCoordinator.RegisterComponent<RigidBody>();
     gCoordinator.RegisterComponent<TransformComp>();
+    gCoordinator.RegisterComponent<CameraComp>();
+    gCoordinator.RegisterComponent<Renderable>();
 
     auto physicsSystem = gCoordinator.RegisterSystem<PhysicsSystem>();
+    {
+        Signature signature;
+        signature.set(gCoordinator.GetComponentType<Gravity>());
+        signature.set(gCoordinator.GetComponentType<RigidBody>());
+        signature.set(gCoordinator.GetComponentType<TransformComp>());
+        gCoordinator.SetSystemSignature<PhysicsSystem>(signature);
+    }
 
-    Signature signature;
-    signature.set(gCoordinator.GetComponentType<Gravity>());
-    signature.set(gCoordinator.GetComponentType<RigidBody>());
-    signature.set(gCoordinator.GetComponentType<TransformComp>());
-    gCoordinator.SetSystemSignature<PhysicsSystem>(signature);
+    auto renderSystem = gCoordinator.RegisterSystem<RenderSystem>();
+	{
+		Signature signature;
+		signature.set(gCoordinator.GetComponentType<Renderable>());
+		signature.set(gCoordinator.GetComponentType<TransformComp>());
+		gCoordinator.SetSystemSignature<RenderSystem>(signature);
+	}
 
     std::default_random_engine generator;
     std::uniform_real_distribution<float> randPosition(-100.0f, 100.0f);

@@ -7,7 +7,14 @@ src/core/system_manager.h
 src/core/coordinator.h
 src/core/entity_manager.h
 
-src/core/components.h
+src/core/components/camera.h
+src/core/components/gravity.h
+src/core/components/rigid_body.h
+src/core/components/transform.h
+src/core/components/renderable.h
+
+src/core/systems/physics_system.h
+src/core/systems/render_system.h
 
 src/game/game.h
 src/game/mainscreen.h
