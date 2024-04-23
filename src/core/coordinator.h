@@ -63,6 +63,7 @@ public:
     template <typename T>
     void RemoveComponent(Entity entity)
     {
+        fmt::print("RemoveComponent: Removing component {}\n", typeid(T).name());
         mComponentManager->RemoveComponent<T>(entity);
 
         auto signature = mEntityManager->GetSignature(entity);

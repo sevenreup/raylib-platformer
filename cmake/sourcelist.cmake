@@ -26,4 +26,6 @@ ${headers}
     src/game/game.cpp 
     src/game/mainscreen.cpp 
     src/game/player.cpp 
+
+    src/core/systems/render_system.cpp
 )

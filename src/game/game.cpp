@@ -33,12 +33,13 @@ void Game::Run()
     }
 
     auto renderSystem = gCoordinator.RegisterSystem<RenderSystem>();
-	{
-		Signature signature;
-		signature.set(gCoordinator.GetComponentType<Renderable>());
-		signature.set(gCoordinator.GetComponentType<TransformComp>());
-		gCoordinator.SetSystemSignature<RenderSystem>(signature);
-	}
+    {
+        Signature signature;
+        signature.set(gCoordinator.GetComponentType<Renderable>());
+        signature.set(gCoordinator.GetComponentType<TransformComp>());
+        gCoordinator.SetSystemSignature<RenderSystem>(signature);
+    }
+    renderSystem->Init();
 
     std::default_random_engine generator;
     std::uniform_real_distribution<float> randPosition(-100.0f, 100.0f);
@@ -83,6 +84,7 @@ void Game::Run()
         auto startTime = std::chrono::high_resolution_clock::now();
 
         physicsSystem->Update(dt);
+        renderSystem->Update(dt);
 
         auto stopTime = std::chrono::high_resolution_clock::now();
 

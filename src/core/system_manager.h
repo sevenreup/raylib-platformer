@@ -3,6 +3,7 @@
 #include <unordered_map>
 #include "entity_manager.h"
 #include <memory>
+#include <fmt/format.h>
 
 class SystemManager
 {
@@ -58,13 +59,15 @@ public:
             auto const &type = pair.first;
             auto const &system = pair.second;
             auto const &systemSignature = mSignatures[type];
-
+            fmt::print("Jeff {}, {}, {}\n", (entitySignature & systemSignature).to_string(), systemSignature.to_string(), entitySignature.to_string());
             if ((entitySignature & systemSignature) == systemSignature)
             {
+                fmt::print("EntitySignatureChanged: Inserting entity {}, {}\n", entity, type);
                 system->mEntities.insert(entity);
             }
             else
             {
+                fmt::print("EntitySignatureChanged: Deleting entity {}, {}\n", entity, type);
                 system->mEntities.erase(entity);
             }
         }
